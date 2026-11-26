@@ -10,11 +10,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/montesito/dlauncher/releases/latest/download/DLauncher.exe"><img src="https://img.shields.io/badge/⬇_Download-DLauncher.exe-0070F3?style=for-the-badge" alt="Download DLauncher.exe" /></a>
+  <a href="https://github.com/montesito/dlauncher/raw/main/bin/DLauncher.exe"><img src="https://img.shields.io/badge/⬇_Download-DLauncher.exe-0070F3?style=for-the-badge" alt="Download DLauncher.exe" /></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/montesito/dlauncher/releases/latest"><img src="https://img.shields.io/github/v/release/montesito/dlauncher?label=version&color=0070F3" alt="Latest version" /></a>
+  <img src="https://img.shields.io/badge/version-1.5.1-0070F3" alt="Latest version 1.5.1" />
   <img src="https://img.shields.io/badge/Windows-10%20%7C%2011-0070F3" alt="Windows 10 | 11" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-30D158" alt="MIT license" /></a>
   <img src="https://img.shields.io/badge/install-not%20required-FF5500" alt="No installation required" />
@@ -83,7 +83,7 @@ DLauncher is built **only with components that already ship with Windows**: Powe
 
 ## Download, step by step
 
-**1. Download the file:** **[DLauncher.exe](https://github.com/montesito/dlauncher/releases/latest/download/DLauncher.exe)**.
+**1. Download the file:** **[DLauncher.exe](https://github.com/montesito/dlauncher/raw/main/bin/DLauncher.exe)**.
 
 **2. First browser warning.** Your browser (Edge, Chrome…) may say the file *"isn't commonly downloaded"* or *"could be harmful"*. Open the warning's menu (**⋯**) and choose **Keep**.
 

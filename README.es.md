@@ -10,11 +10,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/montesito/dlauncher/releases/latest/download/DLauncher.exe"><img src="https://img.shields.io/badge/⬇_Descargar-DLauncher.exe-0070F3?style=for-the-badge" alt="Descargar DLauncher.exe" /></a>
+  <a href="https://github.com/montesito/dlauncher/raw/main/bin/DLauncher.exe"><img src="https://img.shields.io/badge/⬇_Descargar-DLauncher.exe-0070F3?style=for-the-badge" alt="Descargar DLauncher.exe" /></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/montesito/dlauncher/releases/latest"><img src="https://img.shields.io/github/v/release/montesito/dlauncher?label=versi%C3%B3n&color=0070F3" alt="Última versión" /></a>
+  <img src="https://img.shields.io/badge/versi%C3%B3n-1.5.1-0070F3" alt="Última versión 1.5.1" />
   <img src="https://img.shields.io/badge/Windows-10%20%7C%2011-0070F3" alt="Windows 10 | 11" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/licencia-MIT-30D158" alt="Licencia MIT" /></a>
   <img src="https://img.shields.io/badge/instalaci%C3%B3n-no%20necesaria-FF5500" alt="Sin instalación" />
@@ -83,7 +83,7 @@ DLauncher está hecho **solo con componentes que ya trae Windows**: PowerShell, 
 
 ## Descarga, paso a paso
 
-**1. Descarga el archivo:** **[DLauncher.exe](https://github.com/montesito/dlauncher/releases/latest/download/DLauncher.exe)**.
+**1. Descarga el archivo:** **[DLauncher.exe](https://github.com/montesito/dlauncher/raw/main/bin/DLauncher.exe)**.
 
 **2. Primer aviso del navegador.** El navegador (Edge, Chrome…) puede indicar que el archivo *«no se descarga con frecuencia»* o que *«podría ser peligroso»*. Abre el menú del aviso (**⋯**) y elige **Conservar**.
 
