@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Open everything you need for your workday with one click.</strong><br />
-  Websites, apps, files and folders, organized your way. Simple, private and free.
+  A launcher for <b>Windows 10 and 11</b>: websites, apps, files and folders, organized your way. Simple, private and free.
 </p>
 
 <p align="center">
@@ -44,10 +44,32 @@ Every morning, many of us open the same things one by one: email, Teams, the com
 
 ---
 
+## Why DLauncher?
+
+*"I can just make my apps open when Windows starts."* You can, but it has downsides:
+
+- 🐢 **Windows starts slower,** and sometimes **freezes** trying to open everything at once right after you switch it on.
+- 📅 **You don't need the same things every day.** One day is support, another is meetings, another is a specific project. Startup apps always open everything, whether you need it or not.
+- 🧩 **Websites and folders can't easily be set to open at startup.** DLauncher opens websites, apps, files and folders alike.
+
+DLauncher does the opposite: **you decide what opens and when**, with one click, and launches are spaced out with a short pause so your PC doesn't get overloaded.
+
+### Your workspace, always ready
+
+Over time, DLauncher becomes **the map of your daily work**: one place that brings together all the tools, platforms and apps you need to do your job, instead of having them scattered across bookmarks, desktop shortcuts and memory.
+
+- 🔁 **Shut down or restart without hesitation.** Since reopening everything takes one click, you can turn your PC off at the end of the day, or restart it when Windows asks (updates, slowness…), without dreading the time it takes to open everything again, one by one. A PC that restarts regularly runs better and stays up to date.
+- 🧠 **Nothing gets forgotten.** That tool you only use on Mondays, the portal you always remember mid-morning, the team's shared folder… it's all on the list.
+- ⏱️ **Start working sooner.** Go from ten or fifteen clicks and searches every morning to just one.
+- 🗂️ **Order and focus.** Tags separate contexts (*Morning*, *Support*, *Meetings*) so you only open what you need right now.
+- 🤝 **Easy to share.** Export your list and hand it to a new teammate: they'll have all the team's tools from day one.
+- 💻 **Follows you across PCs.** Save your list in OneDrive and you'll have the same one on your laptop and your office PC.
+
+---
+
 ## Download and first start
 
-1. **[Download DLauncher.exe](https://github.com/montesito/dlauncher/releases/latest/download/DLauncher.exe)** (latest version).
-   You can also browse [all versions](https://github.com/montesito/dlauncher/releases) or get it directly from the [`bin`](bin/DLauncher.exe) folder.
+1. **[Download DLauncher.exe](https://github.com/montesito/dlauncher/releases/latest/download/DLauncher.exe)**.
 2. **Double-click it.** There's nothing to install. You can keep the file anywhere, for example on your desktop.
 3. On first start, choose your **language and theme**, accept the **terms of use**, and pick a **folder to save your list**. A OneDrive folder is a good choice: your list then follows you to every PC.
 
@@ -102,7 +124,7 @@ DLauncher remembers what you ticked, so tomorrow it's just one click.
 - **Undo** if you delete something by mistake (Ctrl+Z, or the button in the notice).
 - **Automatic backup** of your list every time it's saved. If the file is ever damaged, DLauncher restores the backup by itself.
 - **Export and import** your list to share it with your team.
-- **Start with Windows** (optional), so your launcher is waiting for you every morning.
+- **Start with Windows** (optional): only DLauncher's small window opens, ready and waiting; nothing else starts until you choose.
 - **Remembers** its window size and position on each PC.
 
 ### Keyboard shortcuts

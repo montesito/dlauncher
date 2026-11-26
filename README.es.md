@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Abre todo lo que necesitas para tu jornada con un solo clic.</strong><br />
-  Webs, aplicaciones, archivos y carpetas, organizados a tu manera. Sencillo, privado y gratuito.
+  Un lanzador para <b>Windows 10 y 11</b>: webs, aplicaciones, archivos y carpetas, organizados a tu manera. Sencillo, privado y gratuito.
 </p>
 
 <p align="center">
@@ -44,10 +44,32 @@ Cada mañana muchos abrimos lo mismo, una cosa tras otra: el correo, Teams, el p
 
 ---
 
+## ¿Por qué DLauncher?
+
+*«Para eso ya puedo hacer que mis aplicaciones se abran al iniciar Windows.»* Sí, pero tiene sus pegas:
+
+- 🐢 **Windows arranca más lento,** y a veces **se queda pillado** intentando abrirlo todo a la vez justo al encender.
+- 📅 **No todos los días necesitas lo mismo.** Un día toca soporte, otro reuniones, otro un proyecto concreto. El inicio automático abre siempre todo, lo necesites o no.
+- 🧩 **Las webs y carpetas no se pueden** configurar fácilmente para que se abran al arrancar; DLauncher abre webs, aplicaciones, archivos y carpetas por igual.
+
+DLauncher hace justo lo contrario: **tú decides qué abrir y cuándo**, con un clic, y las aperturas se escalonan con una breve pausa para que el equipo no se sature.
+
+### Tu puesto de trabajo, siempre listo
+
+Con el tiempo, DLauncher se convierte en **el mapa de tu trabajo diario**: el lugar donde están reunidas todas las herramientas, plataformas y aplicaciones que necesitas para hacer tu trabajo, en vez de estar repartidas entre marcadores, accesos directos del escritorio y la memoria.
+
+- 🔁 **Apaga o reinicia sin pereza.** Como reabrir todo es un clic, puedes apagar el equipo al final del día o reiniciarlo cuando Windows lo pide (actualizaciones, lentitud…) sin pensar en el rato que tardarás en volver a abrirlo todo, una cosa tras otra. Un equipo que se reinicia a menudo funciona mejor y está más al día.
+- 🧠 **No se te olvida nada.** Esa herramienta que solo usas los lunes, el portal que siempre recuerdas a media mañana, la carpeta compartida del equipo… todo está en la lista.
+- ⏱️ **Empiezas a trabajar antes.** Pasas de diez o quince clics y búsquedas cada mañana a uno solo.
+- 🗂️ **Orden y foco.** Las etiquetas separan contextos (*Mañana*, *Soporte*, *Reuniones*) para abrir solo lo que toca ahora.
+- 🤝 **Fácil de compartir.** Exporta tu lista y pásasela a un compañero que se incorpora: tendrá todas las herramientas del equipo desde el primer día.
+- 💻 **Te sigue entre equipos.** Si guardas la lista en OneDrive, tendrás la misma en el portátil y en el equipo de la oficina.
+
+---
+
 ## Descarga y primer inicio
 
-1. **[Descarga DLauncher.exe](https://github.com/montesito/dlauncher/releases/latest/download/DLauncher.exe)** (última versión).
-   También puedes ver [todas las versiones](https://github.com/montesito/dlauncher/releases) o descargarlo directamente desde la carpeta [`bin`](bin/DLauncher.exe).
+1. **[Descarga DLauncher.exe](https://github.com/montesito/dlauncher/releases/latest/download/DLauncher.exe)**.
 2. **Haz doble clic.** No hay nada que instalar. Puedes guardar el archivo donde quieras, por ejemplo en el escritorio.
 3. En el primer inicio, elige **idioma y tema**, acepta los **términos de uso** y elige una **carpeta donde guardar tu lista**. Una carpeta de OneDrive es buena opción: así tu lista te acompaña en todos tus equipos.
 
@@ -102,7 +124,7 @@ DLauncher recuerda lo que marcaste, así que mañana será un solo clic.
 - **Deshacer** si borras algo por error (Ctrl+Z o el botón del aviso).
 - **Copia de seguridad automática** de tu lista cada vez que se guarda. Si el archivo se dañara, DLauncher recupera la copia por sí solo.
 - **Exporta e importa** tu lista para compartirla con tu equipo.
-- **Iniciar con Windows** (opcional), para que el lanzador te espere cada mañana.
+- **Iniciar con Windows** (opcional): solo se abre la pequeña ventana de DLauncher, lista y esperando; nada más arranca hasta que tú lo decidas.
 - **Recuerda** el tamaño y la posición de la ventana en cada equipo.
 
 ### Atajos de teclado
