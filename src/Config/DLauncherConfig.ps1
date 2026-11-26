@@ -20,6 +20,8 @@ $Global:ConfigPath = $null
 $Global:DLauncherLastGoodJson = $null
 $Global:DLauncherConfigReadOnly = $false
 $Global:DLauncherConfigNotices = [System.Collections.ArrayList]::new()
+$Global:DLauncherFolderMissing = $false   # la carpeta elegida no está disponible ahora mismo
+$Global:DLauncherMissingShown = $false    # el aviso ya se mostró en este episodio
 
 # Avisos pendientes para la interfaz (sin ventanas emergentes desde este módulo)
 function Add-DLauncherConfigNotice {
@@ -48,6 +50,54 @@ function Get-DLauncherConfigFolder {
 # Comprueba si el usuario ya ha configurado una carpeta válida existente
 function Test-DLauncherHasConfigFolder {
     return ($null -ne (Get-DLauncherConfigFolder))
+}
+
+# Ruta guardada en el puntero, exista o no (vacía si nunca se eligió carpeta)
+function Get-DLauncherConfigPointer {
+    if (-not (Test-Path -LiteralPath $Global:ConfigPointerFile)) { return "" }
+    try {
+        return ([System.IO.File]::ReadAllText($Global:ConfigPointerFile, [System.Text.Encoding]::UTF8)).Trim()
+    } catch {
+        return ""
+    }
+}
+
+# Hay una carpeta elegida pero no se encuentra (movida, renombrada o unidad de red/nube no disponible).
+# En ese caso NO se crea nada: se avisa al usuario y se espera a que vuelva o elija otra ubicación
+function Test-DLauncherConfigFolderMissing {
+    $pointer = Get-DLauncherConfigPointer
+    if ([string]::IsNullOrWhiteSpace($pointer)) { return $false }
+    return (-not (Test-Path -LiteralPath $pointer))
+}
+
+# Huella de config.json (fecha y tamaño) para detectar cambios hechos desde otro equipo
+$Global:DLauncherConfigStamp = ""
+function Get-DLauncherConfigFileStamp {
+    try {
+        if ([string]::IsNullOrEmpty($Global:ConfigPath)) { return "" }
+        $fi = New-Object System.IO.FileInfo($Global:ConfigPath)
+        if (-not $fi.Exists) { return "" }
+        return "$($fi.LastWriteTimeUtc.Ticks)|$($fi.Length)"
+    } catch {
+        return ""
+    }
+}
+function Update-DLauncherConfigStamp {
+    $Global:DLauncherConfigStamp = Get-DLauncherConfigFileStamp
+}
+
+# ¿Ha cambiado config.json desde la última lectura o escritura de esta ventana?
+# Solo cuenta como cambio si el contenido es distinto (las sincronizaciones a veces solo tocan la fecha)
+function Test-DLauncherConfigChangedExternally {
+    $stamp = Get-DLauncherConfigFileStamp
+    if ($stamp -eq "" -or $stamp -eq $Global:DLauncherConfigStamp) { return $false }
+    try {
+        $json = Read-DLauncherTextWithRetry -Path $Global:ConfigPath
+    } catch {
+        return $false
+    }
+    $Global:DLauncherConfigStamp = $stamp
+    return ($json -ne $Global:DLauncherLastGoodJson)
 }
 
 # Obtiene la ruta del archivo config.json activo
@@ -172,16 +222,21 @@ function Write-DLauncherJsonText {
     param ([string]$Path, [string]$Json, [switch]$NoBackup)
     $tmp = "$Path.tmp"
     [System.IO.File]::WriteAllText($tmp, $Json, (New-Object System.Text.UTF8Encoding($false)))
+    $replaced = $false
     if ((Test-Path -LiteralPath $Path) -and -not $NoBackup) {
         try {
             [System.IO.File]::Replace($tmp, $Path, "$Path.bak", $true)
-            return
+            $replaced = $true
         } catch {
             # Algunas unidades de red o carpetas sincronizadas no admiten Replace: copia manual
             try { Copy-Item -LiteralPath $Path -Destination "$Path.bak" -Force } catch { }
         }
     }
-    Move-Item -LiteralPath $tmp -Destination $Path -Force
+    if (-not $replaced) {
+        Move-Item -LiteralPath $tmp -Destination $Path -Force
+    }
+    # Escritura propia: no debe contar como "cambio desde otro equipo"
+    if ($Path -eq $Global:ConfigPath) { Update-DLauncherConfigStamp }
 }
 
 function Write-DLauncherJsonFile {
@@ -259,6 +314,8 @@ function Set-DLauncherConfigFolder {
     $Global:ConfigPath = Join-Path -Path $FolderPath -ChildPath "config.json"
     $Global:DLauncherLastGoodJson = $null
     $Global:DLauncherConfigReadOnly = $false
+    $Global:DLauncherFolderMissing = $false
+    $Global:DLauncherMissingShown = $false
 
     $alreadyExisted = Test-Path -LiteralPath $Global:ConfigPath
     if (-not $alreadyExisted) {
@@ -274,6 +331,12 @@ function Set-DLauncherConfigFolder {
 
 # Inicializa la estructura del directorio y el JSON de configuración si no existen
 function Initialize-DLauncherConfig {
+    if (Test-DLauncherConfigFolderMissing) {
+        # Carpeta elegida pero no disponible: no crear nada (ni allí ni en otra ubicación)
+        $Global:ConfigDir = Get-DLauncherConfigPointer
+        $Global:ConfigPath = Join-Path -Path $Global:ConfigDir -ChildPath "config.json"
+        return
+    }
     try {
         $folder = Get-DLauncherConfigFolder
         if ($null -ne $folder) {
@@ -298,7 +361,17 @@ function Initialize-DLauncherConfig {
 function Get-DLauncherConfig {
     $activePath = Get-DLauncherConfigPath
     if (-not (Test-Path -LiteralPath $activePath)) {
+        if (Test-DLauncherConfigFolderMissing) {
+            # La carpeta ha desaparecido (movida o unidad desconectada): trabajar con lo último leído y no escribir
+            $Global:DLauncherConfigReadOnly = $true
+            Add-DLauncherConfigNotice -Kind 'missing' -Detail (Get-DLauncherConfigPointer)
+            if ($null -ne $Global:DLauncherLastGoodJson) {
+                return (ConvertFrom-DLauncherConfigJson -Json $Global:DLauncherLastGoodJson)
+            }
+            return New-DLauncherDefaultConfig
+        }
         Initialize-DLauncherConfig
+        $activePath = Get-DLauncherConfigPath
     }
 
     $json = $null
@@ -318,6 +391,7 @@ function Get-DLauncherConfig {
         $config = ConvertFrom-DLauncherConfigJson -Json $json
         $Global:DLauncherLastGoodJson = $json
         $Global:DLauncherConfigReadOnly = $false
+        Update-DLauncherConfigStamp
         return $config
     } catch {
         return (Restore-DLauncherDamagedConfig -Path $activePath -Json $json)
@@ -331,14 +405,21 @@ function Save-DLauncherConfig {
         [PSCustomObject]$Config
     )
     if ($Global:DLauncherConfigReadOnly) {
-        Add-DLauncherConfigNotice -Kind 'locked'
+        if (Test-DLauncherConfigFolderMissing) {
+            Add-DLauncherConfigNotice -Kind 'missing' -Detail (Get-DLauncherConfigPointer)
+        } else {
+            Add-DLauncherConfigNotice -Kind 'locked'
+        }
         return $false
     }
     try {
         $activePath = Get-DLauncherConfigPath
         $parentDir = Split-Path -Parent -Path $activePath
         if (-not (Test-Path -LiteralPath $parentDir)) {
-            $null = New-Item -ItemType Directory -Path $parentDir -Force
+            # Nunca recrear una carpeta de configuración que ha desaparecido: se perdería la pista de la real
+            $Global:DLauncherConfigReadOnly = $true
+            Add-DLauncherConfigNotice -Kind 'missing' -Detail $parentDir
+            return $false
         }
         $Global:DLauncherLastGoodJson = Write-DLauncherJsonFile -Path $activePath -Object $Config
         return $true

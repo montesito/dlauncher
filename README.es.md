@@ -118,18 +118,18 @@ Solo hay que configurarlo una vez en cada uno:
 | **Segundo equipo o entorno** | Abre DLauncher y selecciona **esa misma carpeta compartida**. Aparecerá tu lista al momento. |
 
 > [!NOTE]
-> DLauncher lee tu lista **al abrirse**. Si lo tienes abierto en los dos entornos a la vez, los cambios hechos en uno se verán en el otro la próxima vez que lo abras allí. Evita editar la lista en los dos al mismo tiempo: prevalece el último cambio guardado.
+> ¿Lo tienes abierto en los dos entornos a la vez? No pasa nada: **la lista se actualiza sola** en unos segundos con los cambios hechos en el otro.
 
 ### Mover la carpeta a otro sitio
 
 Tu lista es solo una carpeta con un archivo, así que moverla es muy sencillo:
 
-1. **Copia** la carpeta y **pégala** donde la necesites (otra unidad, otra carpeta de red…).
+1. **Corta** (o copia) la carpeta y **pégala** donde la necesites (otra unidad, otra carpeta de red…).
 2. En DLauncher, ve a **Ajustes → Datos y copia → Carpeta de configuración → Cambiar…** y selecciona la nueva ubicación. Tu lista se carga al momento.
-3. Cuando lo hayas comprobado, borra la carpeta antigua.
+3. Si la copiaste, borra la antigua cuando lo hayas comprobado.
 
 > [!TIP]
-> Mejor **copiar** que **cortar**: si DLauncher se abre mientras la carpeta antigua ya no existe, empezará con una lista vacía hasta que le indiques la nueva ubicación. Tu lista no se pierde, pero así te evitas el susto.
+> Si DLauncher no encuentra la carpeta donde la espera (porque la has movido, o porque la unidad de red no está conectada), **te avisa y te deja elegir la nueva ubicación** al momento. No borra ni crea nada, y si la unidad vuelve a estar disponible, carga tu lista sola.
 
 ### Compartir tu lista con un compañero
 
@@ -187,6 +187,7 @@ DLauncher recuerda lo que marcaste, así que mañana será un solo clic.
 - **Deshacer** si borras algo por error (Ctrl+Z o el botón del aviso).
 - **Copia de seguridad automática** de tu lista cada vez que se guarda. Si el archivo se dañara, DLauncher recupera la copia por sí solo.
 - **Exporta e importa** tu lista para compartirla con tu equipo.
+- **Sincronización automática:** si usas la misma carpeta en varios equipos, la lista se actualiza sola con los cambios de los demás.
 - **Iniciar con Windows** (opcional): solo se abre la pequeña ventana de DLauncher, lista y esperando; nada más arranca hasta que tú lo decidas.
 - **Recuerda** el tamaño y la posición de la ventana en cada equipo.
 

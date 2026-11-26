@@ -10,7 +10,7 @@ try {
 }
 
 $Global:DLauncherFootnote = "2026. DLauncher. by @montesito"
-$Global:DLauncherVersion = "1.5.0"
+$Global:DLauncherVersion = "1.5.1"
 $Global:DLauncherTermsVersion = "2026-11-26"
 $Global:DLauncherManyThreshold = 10
 
@@ -67,6 +67,11 @@ if (Test-DLauncherHasConfigFolder) {
         }
         if ($changed) { $null = Save-DLauncherConfig -Config $config }
     }
+} elseif (Test-DLauncherConfigFolderMissing) {
+    # La carpeta elegida no está (movida o unidad no disponible): se avisa al abrir, sin crear nada
+    Initialize-DLauncherConfig
+    $Global:DLauncherFolderMissing = $true
+    Add-DLauncherConfigNotice -Kind 'missing' -Detail (Get-DLauncherConfigPointer)
 }
 
 $Global:ui = New-DLauncherWindow
@@ -334,6 +339,18 @@ function Global:Show-DLauncherConfigNotices {
     if ($ui.ConfirmOverlay.Visibility -eq [System.Windows.Visibility]::Visible) { return }
     $notice = $Global:DLauncherConfigNotices[0]
     $Global:DLauncherConfigNotices.Clear()
+    if ($notice.Kind -eq 'missing') {
+        # Aviso antiguo: la carpeta ya ha vuelto
+        if (-not (Test-DLauncherConfigFolderMissing)) { Update-DLauncherStatusBar; return }
+        # Carpeta no encontrada: una vez por episodio, con opción de elegir la nueva ubicación
+        $Global:DLauncherFolderMissing = $true
+        Update-DLauncherStatusBar
+        if ($Global:DLauncherMissingShown) { return }
+        $Global:DLauncherMissingShown = $true
+        Show-DLauncherMessageBox -Title (T "notice.missing.title") -Message (T "notice.missing.body" $notice.Detail) `
+            -OkText (T "missing.choose") -CancelText (T "missing.later") -OnOk { Invoke-DLauncherChooseConfigFolder }
+        return
+    }
     Update-DLauncherStatusBar
     # Los avisos repetibles (bloqueo, error al guardar) se muestran una vez por sesión
     if ($notice.Kind -in 'locked', 'saveFailed') {
@@ -974,7 +991,10 @@ function Global:Update-DLauncherStatus {
 function Global:Update-DLauncherStatusBar {
     if ($Global:DLauncherState.Launching) { return }
     $hasFolder = Test-DLauncherHasConfigFolder
-    if ($Global:DLauncherConfigReadOnly) {
+    if ($Global:DLauncherFolderMissing) {
+        $ui.StatusDot.SetResourceReference([System.Windows.Shapes.Shape]::FillProperty, 'Warning')
+        $ui.StatusBarText.Text = T "statusbar.missing"
+    } elseif ($Global:DLauncherConfigReadOnly) {
         $ui.StatusDot.SetResourceReference([System.Windows.Shapes.Shape]::FillProperty, 'Warning')
         $ui.StatusBarText.Text = T "statusbar.readonly"
     } elseif (-not $hasFolder) {
@@ -2567,21 +2587,94 @@ $ui.BtnClearIconCache.Add_Click({
     Show-DLauncherToast (T "toast.cacheCleared")
 })
 
-$ui.BtnChangeConfigFolder.Add_Click({
+# Elegir (o cambiar) la carpeta de configuración. Devuelve $true si se eligió una
+function Global:Invoke-DLauncherChooseConfigFolder {
     $folderDialog = New-Object System.Windows.Forms.FolderBrowserDialog
     $folderDialog.Description = T "folder.desc"
     $folderDialog.ShowNewFolderButton = $true
-    if ($folderDialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK -and -not [string]::IsNullOrWhiteSpace($folderDialog.SelectedPath)) {
-        $res = Set-DLauncherConfigFolder -FolderPath $folderDialog.SelectedPath
-        Hide-DLauncherOverlay $ui.SettingsOverlay
-        Update-UIList
-        if ($res.AlreadyExisted) {
-            Show-DLauncherMessageBox -Title (T "folder.loadedTitle") -Message (T "folder.loadedBody")
-        } else {
-            Show-DLauncherMessageBox -Title (T "folder.createdTitle") -Message (T "folder.createdBody")
-        }
+    if ($folderDialog.ShowDialog() -ne [System.Windows.Forms.DialogResult]::OK -or [string]::IsNullOrWhiteSpace($folderDialog.SelectedPath)) {
+        return $false
     }
+    $res = Set-DLauncherConfigFolder -FolderPath $folderDialog.SelectedPath
+    Hide-DLauncherOverlay $ui.SettingsOverlay
+    Update-UIList
+    if ($res.AlreadyExisted) {
+        Show-DLauncherMessageBox -Title (T "folder.loadedTitle") -Message (T "folder.loadedBody")
+    } else {
+        Show-DLauncherMessageBox -Title (T "folder.createdTitle") -Message (T "folder.createdBody")
+    }
+    return $true
+}
+
+$ui.BtnChangeConfigFolder.Add_Click({ $null = Invoke-DLauncherChooseConfigFolder })
+
+# ===================== SINCRONIZACIÓN ENTRE EQUIPOS =====================
+# Con la ventana activa se comprueba cada pocos segundos si config.json ha cambiado desde otro equipo
+# (o si la carpeta ha desaparecido o vuelto), y la lista se actualiza sola sin perder la vista actual
+
+function Global:Update-DLauncherFromDisk {
+    $view = $Global:DLauncherState.ActiveView
+    $offset = $ui.ListScroll.VerticalOffset
+    Update-UIList
+    # Mantener la vista local (la del otro equipo no debe cambiar lo que estás mirando)
+    $stillValid = ($view -eq "" -or $view -eq '::selected' -or @($Global:DLauncherState.Groups | Where-Object { $_.Id -eq $view }).Count -gt 0)
+    if ($stillValid -and $view -ne $Global:DLauncherState.ActiveView) {
+        $Global:DLauncherState.ActiveView = $view
+        Update-DLauncherNavStyles
+        Update-DLauncherHeader
+        Update-DLauncherFilter
+    }
+    $ui.ListScroll.ScrollToVerticalOffset($offset)
+}
+
+function Global:Invoke-DLauncherConfigWatch {
+    if ([string]::IsNullOrWhiteSpace((Get-DLauncherConfigPointer))) { return }
+    if ($Global:DLauncherState.Launching) { return }
+
+    if (Test-DLauncherConfigFolderMissing) {
+        if (-not $Global:DLauncherFolderMissing) {
+            # Acaba de desaparecer: se conserva la lista en pantalla (solo lectura) y se avisa
+            $Global:DLauncherFolderMissing = $true
+            $Global:DLauncherConfigReadOnly = $true
+            Add-DLauncherConfigNotice -Kind 'missing' -Detail (Get-DLauncherConfigPointer)
+            Show-DLauncherConfigNotices
+        }
+        return
+    }
+
+    if ($Global:DLauncherFolderMissing) {
+        # Ha vuelto (unidad reconectada, carpeta restaurada…)
+        $Global:DLauncherFolderMissing = $false
+        $Global:DLauncherMissingShown = $false
+        $Global:DLauncherConfigNotices.Clear()
+        if ($ui.ConfirmOverlay.Visibility -eq [System.Windows.Visibility]::Visible -and $ui.ConfirmTitleText.Text -eq (T "notice.missing.title")) {
+            Hide-DLauncherOverlay $ui.ConfirmOverlay
+            $Global:DLauncherState.ActiveOkCallback = $null
+            $Global:DLauncherState.ActiveCancelCallback = $null
+        }
+        Initialize-DLauncherConfig
+        Update-DLauncherFromDisk
+        Show-DLauncherToast -Text (T "toast.folderBack") -Kind 'info'
+        return
+    }
+
+    # No refrescar mientras se edita algo o se arrastra una fila
+    if ($null -ne (Get-DLauncherOpenOverlay)) { return }
+    if ([System.Windows.Input.Mouse]::LeftButton -eq [System.Windows.Input.MouseButtonState]::Pressed) { return }
+
+    if (Test-DLauncherConfigChangedExternally) {
+        Update-DLauncherFromDisk
+        Show-DLauncherToast -Text (T "toast.reloaded") -Kind 'info'
+    }
+}
+
+$Global:DLauncherWatchTimer = New-Object System.Windows.Threading.DispatcherTimer
+$Global:DLauncherWatchTimer.Interval = [TimeSpan]::FromSeconds(3)
+$Global:DLauncherWatchTimer.Add_Tick({
+    if (-not $ui.Window.IsActive) { return }
+    try { Invoke-DLauncherConfigWatch } catch { }
 })
+$ui.Window.Add_Activated({ try { Invoke-DLauncherConfigWatch } catch { } })
 
 $ui.BtnClearAll.Add_Click({
     Show-DLauncherMessageBox -Title (T "clearAll.title") -Message (T "clearAll.body") -OkText (T "clearAll.ok") -CancelText (T "common.cancel") -Danger -OnOk {
@@ -3007,7 +3100,7 @@ Initialize-DLauncherWindowBounds
 Update-DLauncherSidebarVisibility
 Update-DLauncherLanguage
 
-if (-not (Test-DLauncherHasConfigFolder)) {
+if (-not (Test-DLauncherHasConfigFolder) -and -not $Global:DLauncherFolderMissing) {
     # Primer inicio: bienvenida con términos, idioma, tema y carpeta de configuración
     $ui.SetupOverlay.Visibility = [System.Windows.Visibility]::Visible
 } elseif ([string](Get-DLauncherPref -Name 'TermsAccepted' -Default '') -ne $Global:DLauncherTermsVersion) {
@@ -3018,6 +3111,7 @@ if (-not (Test-DLauncherHasConfigFolder)) {
 $ui.Window.Add_Loaded({
     Update-DLauncherFilter -Animate
     Show-DLauncherConfigNotices
+    $Global:DLauncherWatchTimer.Start()
 })
 
 [void]$ui.Window.ShowDialog()

@@ -118,18 +118,18 @@ You only set it up once on each:
 | **Second PC or environment** | Open DLauncher and select **that same shared folder**. Your list appears right away. |
 
 > [!NOTE]
-> DLauncher reads your list **when it opens**. If it's open in both environments at the same time, changes made in one show up in the other the next time you open it there. Avoid editing the list in both at once: the last saved change wins.
+> Open in both environments at the same time? No problem: **the list updates itself** within a few seconds with the changes made in the other one.
 
 ### Moving the folder somewhere else
 
 Your list is just a folder with one file, so moving it is easy:
 
-1. **Copy** the folder and **paste** it where you need it (another drive, another network folder…).
+1. **Cut** (or copy) the folder and **paste** it where you need it (another drive, another network folder…).
 2. In DLauncher, go to **Settings → Data & backup → Configuration folder → Change…** and select the new location. Your list loads right away.
-3. Once you've checked it, delete the old folder.
+3. If you copied it, delete the old one once you've checked.
 
 > [!TIP]
-> **Copy** rather than **cut**: if DLauncher opens while the old folder no longer exists, it starts with an empty list until you point it to the new location. Your list isn't lost, but this saves you the scare.
+> If DLauncher can't find the folder where it expects it (because you moved it, or the network drive isn't connected), **it lets you know and lets you choose the new location** right away. It deletes and creates nothing, and if the drive comes back, it loads your list by itself.
 
 ### Sharing your list with a teammate
 
@@ -187,6 +187,7 @@ DLauncher remembers what you ticked, so tomorrow it's just one click.
 - **Undo** if you delete something by mistake (Ctrl+Z, or the button in the notice).
 - **Automatic backup** of your list every time it's saved. If the file is ever damaged, DLauncher restores the backup by itself.
 - **Export and import** your list to share it with your team.
+- **Automatic sync:** if you use the same folder on several PCs, the list updates itself with changes made on the others.
 - **Start with Windows** (optional): only DLauncher's small window opens, ready and waiting; nothing else starts until you choose.
 - **Remembers** its window size and position on each PC.
 

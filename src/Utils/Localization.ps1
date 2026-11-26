@@ -89,6 +89,7 @@ $Global:DLauncherStrings = @{
         # --- Barra de estado ---
         'statusbar.ready'        = 'Listo · {0} herramientas'
         'statusbar.noFolder'     = 'Sin carpeta de configuración'
+        'statusbar.missing'      = 'No se encuentra la carpeta de configuración'
         'statusbar.readonly'     = 'Configuración en uso por otro programa: los cambios no se guardan'
         'statusbar.launching'    = 'Abriendo {0} de {1} · {2}'
         'status.folder.tip'      = 'Carpeta de configuración (clic para abrirla)'
@@ -111,6 +112,8 @@ $Global:DLauncherStrings = @{
         'toast.copied'           = 'Copiado al portapapeles'
         'toast.copyFailed'       = 'No se pudo usar el portapapeles'
         'toast.restored'         = 'Cambios deshechos'
+        'toast.reloaded'         = 'Lista actualizada con cambios de otro equipo'
+        'toast.folderBack'       = 'La carpeta de configuración vuelve a estar disponible'
         'toast.tagged'           = '«{0}» etiquetada como {1}'
         'toast.alreadyTagged'    = '«{0}» ya tenía esa etiqueta'
         'toast.tagDeleted'       = 'Etiqueta «{0}» eliminada'
@@ -309,6 +312,10 @@ $Global:DLauncherStrings = @{
         'notice.locked.body'     = "No se pudo leer o guardar config.json (puede estar bloqueado por OneDrive u otro programa). Para no perder datos, DLauncher no escribirá en él hasta que vuelva a estar disponible.`n`nDetalle: {0}"
         'notice.saveFailed.title'= 'No se pudo guardar'
         'notice.saveFailed.body' = "No se pudieron guardar los cambios en la carpeta de configuración.`n`nDetalle: {0}"
+        'notice.missing.title'   = 'No se encuentra tu carpeta de configuración'
+        'notice.missing.body'    = "DLauncher no encuentra la carpeta donde se guarda tu lista:`n{0}`n`n• Si la has movido o renombrado, elige su nueva ubicación.`n• Si está en una unidad de red o en la nube, comprueba la conexión: DLauncher la cargará sola en cuanto vuelva a estar disponible.`n`nNo se ha borrado ni creado nada."
+        'missing.choose'         = 'Elegir carpeta…'
+        'missing.later'          = 'Ahora no'
 
         # --- Bienvenida y términos ---
         'setup.title'            = 'Te damos la bienvenida a DLauncher'
@@ -358,7 +365,7 @@ $Global:DLauncherStrings = @{
         'faq.q8'                 = 'He eliminado algo por error'
         'faq.a8'                 = 'Pulsa «Deshacer» en el aviso que aparece, o Ctrl+Z justo después. Además, DLauncher guarda una copia de seguridad automática (config.json.bak).'
         'faq.q9'                 = '¿Cómo uso DLauncher en varios equipos?'
-        'faq.a9'                 = 'Elige una carpeta sincronizada (ej. OneDrive) como carpeta de configuración, o usa Exportar/Importar. El idioma, el tema y el tamaño de la ventana se guardan en cada equipo.'
+        'faq.a9'                 = 'Elige una carpeta compartida entre tus equipos (tu unidad de red, OneDrive…) como carpeta de configuración, o usa Exportar/Importar. Si DLauncher está abierto en varios equipos, la lista se actualiza sola con los cambios de los demás. El idioma, el tema y el tamaño de la ventana se guardan en cada equipo.'
         'faq.q10'                = '¿Qué es la paleta de comandos?'
         'faq.a10'                = 'Pulsa Ctrl+K y escribe: ejecuta cualquier acción, abre una herramienta o salta a una etiqueta sin usar el ratón.'
         'faq.q11'                = '¿Puede iniciarse con Windows?'
@@ -587,6 +594,7 @@ Nada de lo anterior limita los derechos que la legislación aplicable no permita
         # --- Status bar ---
         'statusbar.ready'        = 'Ready · {0} tools'
         'statusbar.noFolder'     = 'No configuration folder'
+        'statusbar.missing'      = 'Configuration folder not found'
         'statusbar.readonly'     = 'Configuration in use by another program: changes are not saved'
         'statusbar.launching'    = 'Opening {0} of {1} · {2}'
         'status.folder.tip'      = 'Configuration folder (click to open it)'
@@ -609,6 +617,8 @@ Nada de lo anterior limita los derechos que la legislación aplicable no permita
         'toast.copied'           = 'Copied to clipboard'
         'toast.copyFailed'       = 'Could not use the clipboard'
         'toast.restored'         = 'Changes undone'
+        'toast.reloaded'         = 'List updated with changes from another PC'
+        'toast.folderBack'       = 'The configuration folder is available again'
         'toast.tagged'           = '"{0}" tagged as {1}'
         'toast.alreadyTagged'    = '"{0}" already had that tag'
         'toast.tagDeleted'       = 'Tag "{0}" deleted'
@@ -807,6 +817,10 @@ Nada de lo anterior limita los derechos que la legislación aplicable no permita
         'notice.locked.body'     = "config.json could not be read or saved (it may be locked by OneDrive or another program). To avoid data loss, DLauncher won't write to it until it is available again.`n`nDetails: {0}"
         'notice.saveFailed.title'= 'Could not save'
         'notice.saveFailed.body' = "Changes could not be saved to the configuration folder.`n`nDetails: {0}"
+        'notice.missing.title'   = 'Your configuration folder cannot be found'
+        'notice.missing.body'    = "DLauncher cannot find the folder where your list is saved:`n{0}`n`n• If you moved or renamed it, choose its new location.`n• If it is on a network drive or in the cloud, check your connection: DLauncher will load it automatically as soon as it is available again.`n`nNothing has been deleted or created."
+        'missing.choose'         = 'Choose folder…'
+        'missing.later'          = 'Not now'
 
         # --- Welcome and terms ---
         'setup.title'            = 'Welcome to DLauncher'
@@ -856,7 +870,7 @@ Nada de lo anterior limita los derechos que la legislación aplicable no permita
         'faq.q8'                 = 'I deleted something by mistake'
         'faq.a8'                 = 'Press "Undo" in the notification, or Ctrl+Z right away. DLauncher also keeps an automatic backup (config.json.bak).'
         'faq.q9'                 = 'How do I use DLauncher on several computers?'
-        'faq.a9'                 = 'Choose a synced folder (e.g. OneDrive) as the configuration folder, or use Export/Import. Language, theme and window size are kept per computer.'
+        'faq.a9'                 = 'Choose a folder shared between your PCs (your network drive, OneDrive…) as the configuration folder, or use Export/Import. If DLauncher is open on several PCs, the list updates itself with changes made on the others. Language, theme and window size are kept per computer.'
         'faq.q10'                = 'What is the command palette?'
         'faq.a10'                = 'Press Ctrl+K and type: run any action, open a tool or jump to a tag without using the mouse.'
         'faq.q11'                = 'Can it start with Windows?'
