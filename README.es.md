@@ -63,20 +63,61 @@ Con el tiempo, DLauncher se convierte en **el mapa de tu trabajo diario**: el lu
 - ⏱️ **Empiezas a trabajar antes.** Pasas de diez o quince clics y búsquedas cada mañana a uno solo.
 - 🗂️ **Orden y foco.** Las etiquetas separan contextos (*Mañana*, *Soporte*, *Reuniones*) para abrir solo lo que toca ahora.
 - 🤝 **Fácil de compartir.** Exporta tu lista y pásasela a un compañero que se incorpora: tendrá todas las herramientas del equipo desde el primer día.
-- 💻 **Te sigue entre equipos.** Si guardas la lista en OneDrive, tendrás la misma en el portátil y en el equipo de la oficina.
+- 💻 **Te sigue entre entornos.** Si guardas la lista en una carpeta compartida, tendrás las mismas herramientas en el equipo de oficina, en el escritorio virtual o en el portátil.
 
 ---
 
-## Descarga y primer inicio
+## Seguro y sin virus: tecnología nativa de Windows
 
-1. **[Descarga DLauncher.exe](https://github.com/montesito/dlauncher/releases/latest/download/DLauncher.exe)**.
-2. **Haz doble clic.** No hay nada que instalar. Puedes guardar el archivo donde quieras, por ejemplo en el escritorio.
-3. En el primer inicio, elige **idioma y tema**, acepta los **términos de uso** y elige una **carpeta donde guardar tu lista**. Una carpeta de OneDrive es buena opción: así tu lista te acompaña en todos tus equipos.
+DLauncher está hecho **solo con componentes que ya trae Windows**: PowerShell, .NET Framework y WPF, la misma tecnología con la que están hechas muchas herramientas del propio sistema. Por eso funciona bien en cualquier Windows 10 u 11, sin instalar nada más.
+
+- 🛡️ **Sin virus ni nada oculto.** Todo el código fuente está en este repositorio, abierto para que cualquiera lo revise.
+- 🚫 **No instala nada:** sin drivers, sin servicios en segundo plano, sin cambios en el registro del sistema y sin permisos de administrador.
+- 📁 **Solo escribe sus propios archivos:** tu lista y sus preferencias. Nunca toca tus documentos ni otros programas.
+- 🔍 **Analízalo si quieres:** deja que tu antivirus revise el archivo antes de abrirlo; es lo recomendable con cualquier descarga.
 
 > [!NOTE]
-> **¿Aparece «Windows protegió tu PC»?** DLauncher es gratuito y no está firmado digitalmente (los certificados de firma son caros), así que Windows puede avisarte la primera vez. Pulsa **Más información → Ejecutar de todas formas**. Si lo prefieres, deja que tu antivirus analice antes el archivo; todo el código fuente está en este repositorio para que cualquiera pueda revisarlo.
+> **¿Por qué aparecen avisos al descargarlo?** Porque el `.exe` **no está firmado digitalmente**. La firma es un certificado de pago que usan las grandes empresas; sin ella, Windows y el navegador avisan de cualquier programa que no conocen, **no porque hayan encontrado nada peligroso**. Es lo habitual en el software gratuito y de código abierto.
+
+---
+
+## Descarga, paso a paso
+
+**1. Descarga el archivo:** **[DLauncher.exe](https://github.com/montesito/dlauncher/releases/latest/download/DLauncher.exe)**.
+
+**2. Primer aviso del navegador.** El navegador (Edge, Chrome…) puede indicar que el archivo *«no se descarga con frecuencia»* o que *«podría ser peligroso»*. Abre el menú del aviso (**⋯**) y elige **Conservar**.
+
+**3. Segundo aviso, más llamativo** (con iconos rojos o de advertencia). Aparece porque el archivo no está firmado digitalmente. Pulsa **Mostrar más → Conservar de todas formas**.
+
+**4. Listo:** DLauncher.exe ya está en tu carpeta de Descargas.
+
+**5. Al abrirlo por primera vez,** Windows puede mostrar *«Windows protegió tu PC»*. Pulsa **Más información → Ejecutar de todas formas**. Solo ocurre la primera vez.
+
+> [!TIP]
+> **Pon el `.exe` donde quieras:** en el escritorio, en Documentos, en una carpeta de red o en un USB. No necesita instalarse, así que funciona en cualquier entorno: tu equipo de oficina, un escritorio virtual o un portátil.
 
 **Requisitos:** Windows 10 u 11. Nada más; todo lo que necesita ya viene con Windows.
+
+---
+
+## Primer inicio: la carpeta de tu lista
+
+Al abrir DLauncher por primera vez, eliges **idioma y tema**, aceptas los **términos de uso** y seleccionas la **carpeta donde se guardará tu lista** (el archivo `config.json`).
+
+### Recomendado: una carpeta compartida entre tus equipos
+
+Si trabajas en **más de un entorno**, por ejemplo tu **equipo de oficina** y un **escritorio virtual (EV)**, guarda la lista en una **unidad propia compartida** que veas desde los dos (tu unidad personal de red, OneDrive…).
+
+Así, abras DLauncher donde lo abras, **cargará las mismas herramientas**, y cualquier cambio (añadir, quitar, editar o etiquetar) **aparecerá siempre en los dos entornos**.
+
+Solo hay que configurarlo una vez en cada uno:
+
+| Dónde | Qué hacer |
+| --- | --- |
+| **Primer equipo** (donde lo configuras por primera vez) | Crea una carpeta en tu unidad compartida, por ejemplo `DLauncher`, y selecciónala. Ya está. |
+| **Segundo equipo o entorno** | Abre DLauncher y selecciona **esa misma carpeta compartida**. Aparecerá tu lista al momento. |
+
+Puedes cambiar la carpeta cuando quieras en **Ajustes → Datos y copia**.
 
 ---
 

@@ -63,20 +63,61 @@ Over time, DLauncher becomes **the map of your daily work**: one place that brin
 - ⏱️ **Start working sooner.** Go from ten or fifteen clicks and searches every morning to just one.
 - 🗂️ **Order and focus.** Tags separate contexts (*Morning*, *Support*, *Meetings*) so you only open what you need right now.
 - 🤝 **Easy to share.** Export your list and hand it to a new teammate: they'll have all the team's tools from day one.
-- 💻 **Follows you across PCs.** Save your list in OneDrive and you'll have the same one on your laptop and your office PC.
+- 💻 **Follows you across environments.** Save your list in a shared folder and you'll have the same tools on your office PC, your virtual desktop or your laptop.
 
 ---
 
-## Download and first start
+## Safe and virus-free: native Windows technology
 
-1. **[Download DLauncher.exe](https://github.com/montesito/dlauncher/releases/latest/download/DLauncher.exe)**.
-2. **Double-click it.** There's nothing to install. You can keep the file anywhere, for example on your desktop.
-3. On first start, choose your **language and theme**, accept the **terms of use**, and pick a **folder to save your list**. A OneDrive folder is a good choice: your list then follows you to every PC.
+DLauncher is built **only with components that already ship with Windows**: PowerShell, .NET Framework and WPF, the same technology behind many of Windows' own tools. That's why it runs smoothly on any Windows 10 or 11 PC without installing anything else.
+
+- 🛡️ **No viruses, nothing hidden.** The full source code is in this repository, open for anyone to review.
+- 🚫 **Installs nothing:** no drivers, no background services, no system registry changes and no admin rights.
+- 📁 **Only writes its own files:** your list and its preferences. It never touches your documents or other programs.
+- 🔍 **Scan it if you like:** let your antivirus check the file before opening it, as you should with any download.
 
 > [!NOTE]
-> **"Windows protected your PC"?** DLauncher is free and isn't digitally signed (signing certificates are expensive), so Windows may warn you the first time. Click **More info → Run anyway**. If you prefer, let your antivirus scan the file first; the full source code is in this repository for anyone to review.
+> **Why do warnings appear when downloading?** Because the `.exe` **isn't digitally signed**. Signing requires a paid certificate that big companies use; without one, Windows and browsers warn about any program they don't recognize, **not because they found anything harmful**. This is normal for free, open-source software.
+
+---
+
+## Download, step by step
+
+**1. Download the file:** **[DLauncher.exe](https://github.com/montesito/dlauncher/releases/latest/download/DLauncher.exe)**.
+
+**2. First browser warning.** Your browser (Edge, Chrome…) may say the file *"isn't commonly downloaded"* or *"could be harmful"*. Open the warning's menu (**⋯**) and choose **Keep**.
+
+**3. Second, more alarming warning** (with red or warning icons). It appears because the file isn't digitally signed. Click **Show more → Keep anyway**.
+
+**4. Done:** DLauncher.exe is now in your Downloads folder.
+
+**5. The first time you open it,** Windows may show *"Windows protected your PC"*. Click **More info → Run anyway**. This only happens once.
+
+> [!TIP]
+> **Put the `.exe` wherever you like:** on your desktop, in Documents, in a network folder or on a USB drive. It doesn't need installing, so it works in any environment: your office PC, a virtual desktop or a laptop.
 
 **Requirements:** Windows 10 or 11. Nothing else; everything it needs is already part of Windows.
+
+---
+
+## First start: your list's folder
+
+The first time you open DLauncher, you choose your **language and theme**, accept the **terms of use** and select the **folder where your list will be saved** (the `config.json` file).
+
+### Recommended: a folder shared between your PCs
+
+If you work in **more than one environment**, for example your **office PC** and a **virtual desktop**, save the list on a **personal shared drive** that both can reach (your personal network drive, OneDrive…).
+
+That way, wherever you open DLauncher, **it loads the same tools**, and any change (adding, removing, editing or tagging) **always shows up in both environments**.
+
+You only set it up once on each:
+
+| Where | What to do |
+| --- | --- |
+| **First PC** (where you set it up first) | Create a folder on your shared drive, for example `DLauncher`, and select it. That's it. |
+| **Second PC or environment** | Open DLauncher and select **that same shared folder**. Your list appears right away. |
+
+You can change the folder any time under **Settings → Data & backup**.
 
 ---
 
