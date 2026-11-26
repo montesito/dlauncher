@@ -117,7 +117,29 @@ You only set it up once on each:
 | **First PC** (where you set it up first) | Create a folder on your shared drive, for example `DLauncher`, and select it. That's it. |
 | **Second PC or environment** | Open DLauncher and select **that same shared folder**. Your list appears right away. |
 
-You can change the folder any time under **Settings → Data & backup**.
+> [!NOTE]
+> DLauncher reads your list **when it opens**. If it's open in both environments at the same time, changes made in one show up in the other the next time you open it there. Avoid editing the list in both at once: the last saved change wins.
+
+### Moving the folder somewhere else
+
+Your list is just a folder with one file, so moving it is easy:
+
+1. **Copy** the folder and **paste** it where you need it (another drive, another network folder…).
+2. In DLauncher, go to **Settings → Data & backup → Configuration folder → Change…** and select the new location. Your list loads right away.
+3. Once you've checked it, delete the old folder.
+
+> [!TIP]
+> **Copy** rather than **cut**: if DLauncher opens while the old folder no longer exists, it starts with an empty list until you point it to the new location. Your list isn't lost, but this saves you the scare.
+
+### Sharing your list with a teammate
+
+Someone joining the team needs the same tools? There are two ways:
+
+- **Give them a copy of your folder** (or just the `config.json` file). Your teammate saves it wherever they like and selects it in DLauncher. They get your full list, tags included, and can adapt it without affecting yours.
+- **Export your list** from **Settings → Data & backup → Export** and send them the file. They add it with **Import**: the tools join the ones they already have and arrive unticked, so they choose what to open.
+
+> [!IMPORTANT]
+> Check your list first in case it contains links or paths meant only for certain people. DLauncher stores no passwords, only the names and addresses of your tools.
 
 ---
 

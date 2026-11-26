@@ -117,7 +117,29 @@ Solo hay que configurarlo una vez en cada uno:
 | **Primer equipo** (donde lo configuras por primera vez) | Crea una carpeta en tu unidad compartida, por ejemplo `DLauncher`, y selecciónala. Ya está. |
 | **Segundo equipo o entorno** | Abre DLauncher y selecciona **esa misma carpeta compartida**. Aparecerá tu lista al momento. |
 
-Puedes cambiar la carpeta cuando quieras en **Ajustes → Datos y copia**.
+> [!NOTE]
+> DLauncher lee tu lista **al abrirse**. Si lo tienes abierto en los dos entornos a la vez, los cambios hechos en uno se verán en el otro la próxima vez que lo abras allí. Evita editar la lista en los dos al mismo tiempo: prevalece el último cambio guardado.
+
+### Mover la carpeta a otro sitio
+
+Tu lista es solo una carpeta con un archivo, así que moverla es muy sencillo:
+
+1. **Copia** la carpeta y **pégala** donde la necesites (otra unidad, otra carpeta de red…).
+2. En DLauncher, ve a **Ajustes → Datos y copia → Carpeta de configuración → Cambiar…** y selecciona la nueva ubicación. Tu lista se carga al momento.
+3. Cuando lo hayas comprobado, borra la carpeta antigua.
+
+> [!TIP]
+> Mejor **copiar** que **cortar**: si DLauncher se abre mientras la carpeta antigua ya no existe, empezará con una lista vacía hasta que le indiques la nueva ubicación. Tu lista no se pierde, pero así te evitas el susto.
+
+### Compartir tu lista con un compañero
+
+¿Alguien se incorpora al equipo y necesita las mismas herramientas? Tienes dos formas:
+
+- **Pásale una copia de tu carpeta** (o solo el archivo `config.json`). Tu compañero la guarda donde quiera y la selecciona en DLauncher. Tendrá tu lista completa, con etiquetas incluidas, y podrá adaptarla a su gusto sin afectar a la tuya.
+- **Exporta tu lista** desde **Ajustes → Datos y copia → Exportar** y envíale el archivo. Tu compañero lo añade con **Importar**: las herramientas se suman a las que ya tenga y llegan sin marcar, para que elija cuáles abrir.
+
+> [!IMPORTANT]
+> Revisa antes tu lista por si contiene enlaces o rutas que solo deban usar ciertas personas. DLauncher no guarda contraseñas, solo los nombres y direcciones de tus herramientas.
 
 ---
 
