@@ -1,0 +1,31 @@
+# Build intermediate (bin/DLauncher.exe is committed; the merged script is not)
+bin/*
+!bin/DLauncher.exe
+
+# User data: never commit a personal configuration
+config.json
+config.json.bak
+config.damaged-*.json
+prefs.json
+config_folder.txt
+IconCache/
+
+# Temporary and backup files
+*.tmp
+*.bak
+*.bak-*
+*.log
+*.errors.txt
+
+# Operating system
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Editors and local tooling
+.vscode/
+.idea/
+*.code-workspace
+.claude/
