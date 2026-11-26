@@ -74,7 +74,7 @@ DLauncher está hecho **solo con componentes que ya trae Windows**: PowerShell, 
 - 🛡️ **Sin virus ni nada oculto.** Todo el código fuente está en este repositorio, abierto para que cualquiera lo revise.
 - 🚫 **No instala nada:** sin drivers, sin servicios en segundo plano, sin cambios en el registro del sistema y sin permisos de administrador.
 - 📁 **Solo escribe sus propios archivos:** tu lista y sus preferencias. Nunca toca tus documentos ni otros programas.
-- 🔍 **Analízalo si quieres:** deja que tu antivirus revise el archivo antes de abrirlo; es lo recomendable con cualquier descarga.
+- 🔍 **Para tu tranquilidad,** te sugerimos analizarlo con tu antivirus antes de abrirlo. Es una buena práctica con cualquier descarga, y buena para todos.
 
 > [!NOTE]
 > **¿Por qué aparecen avisos al descargarlo?** Porque el `.exe` **no está firmado digitalmente**. La firma es un certificado de pago que usan las grandes empresas; sin ella, Windows y el navegador avisan de cualquier programa que no conocen, **no porque hayan encontrado nada peligroso**. Es lo habitual en el software gratuito y de código abierto.

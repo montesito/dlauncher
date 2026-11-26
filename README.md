@@ -74,7 +74,7 @@ DLauncher is built **only with components that already ship with Windows**: Powe
 - 🛡️ **No viruses, nothing hidden.** The full source code is in this repository, open for anyone to review.
 - 🚫 **Installs nothing:** no drivers, no background services, no system registry changes and no admin rights.
 - 📁 **Only writes its own files:** your list and its preferences. It never touches your documents or other programs.
-- 🔍 **Scan it if you like:** let your antivirus check the file before opening it, as you should with any download.
+- 🔍 **For your peace of mind,** we suggest scanning it with your antivirus before opening it. It's good practice with any download, and good for everyone.
 
 > [!NOTE]
 > **Why do warnings appear when downloading?** Because the `.exe` **isn't digitally signed**. Signing requires a paid certificate that big companies use; without one, Windows and browsers warn about any program they don't recognize, **not because they found anything harmful**. This is normal for free, open-source software.
